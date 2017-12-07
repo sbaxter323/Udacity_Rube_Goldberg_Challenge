@@ -47,7 +47,7 @@ public class ControllerInputManager : MonoBehaviour
             // Keep the camera height consistent
             Vector3 forwardNoY = new Vector3(transform.forward.x, 0, transform.forward.z);
 
-            laser.SetPosition(0, gameObject.transform.position);
+            laser.SetPosition(0, gameObject.transform.position + new Vector3(0, 0, -.2f));
             RaycastHit hit;
             if (Physics.Raycast(transform.position, forwardNoY, out hit, teleportLength, laserMask))
             {
@@ -55,7 +55,7 @@ public class ControllerInputManager : MonoBehaviour
 				teleportLocation = new Vector3 (teleportLocation.x, startingLocation.y, teleportLocation.z);
                 laser.SetPosition(1, teleportLocation);
                 //aimer position
-                teleportAimerObject.transform.position = new Vector3(teleportLocation.x, teleportLocation.y, teleportLocation.z);
+                teleportAimerObject.transform.position = new Vector3(teleportLocation.x, startingLocation.y-1, teleportLocation.z);
             }
             else
             {
@@ -71,7 +71,7 @@ public class ControllerInputManager : MonoBehaviour
                 laser.SetPosition(1, forwardNoY * teleportLength + transform.position);
                 //Debug.Log("Laser Position: " + laser.GetPosition(1));
                 //aimer position
-                //teleportAimerObject.transform.position = teleportLocation + new Vector3(0, yNudgeAmount, 0);
+                teleportAimerObject.transform.position = teleportLocation + new Vector3(0, 0, 0);
 
             }
         }
